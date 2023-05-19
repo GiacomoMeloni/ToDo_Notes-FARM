@@ -10,6 +10,8 @@ from api.app.config import settings
 from api.app.router import todo_router
 from api.common.logger.setup import logger_setup
 
+from api.app.models.user_model import User
+
 logger_setup()
 logger = logging.getLogger(__name__)
 
@@ -26,6 +28,7 @@ app.add_middleware(CORSMiddleware,
                    allow_methods=["*"],
                    allow_headers=["*"])
 
+
 @app.on_event("startup")
 async def app_init():
     """
@@ -36,6 +39,6 @@ async def app_init():
     db_client: AsyncIOMotorClient = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING)
 
     await init_beanie(database=db_client,
-                      document_models=[])
+                      document_models=[User])
 
 app.include_router(todo_router.router)
