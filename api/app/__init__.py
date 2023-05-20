@@ -36,7 +36,7 @@ async def app_init():
     :return:
     """
 
-    db_client: AsyncIOMotorClient = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING)
+    db_client: AsyncIOMotorClient = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING).todo
 
     await init_beanie(database=db_client,
                       document_models=[User])
