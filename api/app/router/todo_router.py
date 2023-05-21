@@ -2,7 +2,9 @@ import logging
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-router = APIRouter(prefix="/to_do", tags=["to_do"])
+from api.app.config import settings
+
+router = APIRouter(prefix=settings.PREFIX)
 logger = logging.getLogger(__name__)
 
 
