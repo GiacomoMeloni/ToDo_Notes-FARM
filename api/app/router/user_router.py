@@ -3,13 +3,13 @@ from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 
 from api.app.config import settings
-from api.app.schemas.user_schema import UserAuth
+from api.app.schemas.user_schema import UserAuth, CreateUserResponse
 from api.app.services.user_service import UserService
 
 router = APIRouter(prefix=settings.PREFIX)
 
 
-@router.post('/create', summary="Create a new user")
+@router.post('/create', summary="Create a new user", response_model=CreateUserResponse)
 async def create_user(data: UserAuth):
     try:
         return await UserService.create_user(data)
