@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 
 from api.app.config import settings
 
-router = APIRouter(prefix=settings.PREFIX)
+router = APIRouter(prefix=settings.PREFIX, tags=["health"])
 logger = logging.getLogger(__name__)
 
 

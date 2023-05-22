@@ -7,8 +7,9 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from api.app.config import settings
-from api.app.router import todo_router
+from api.app.router import health_router
 from api.app.router import user_router
+from api.app.router import auth_router
 from api.common.logger.setup import logger_setup
 
 from api.app.models.user_model import User
@@ -44,3 +45,4 @@ async def app_init():
 
 app.include_router(todo_router.router)
 app.include_router(user_router.router)
+app.include_router(auth_router.router)
