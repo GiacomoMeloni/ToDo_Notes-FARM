@@ -43,6 +43,6 @@ async def app_init():
     await init_beanie(database=db_client,
                       document_models=[User])
 
-app.include_router(todo_router.router)
+app.include_router(health_router.router)
 app.include_router(user_router.router)
 app.include_router(auth_router.router)
