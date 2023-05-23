@@ -9,7 +9,7 @@ class UserAuth(BaseModel):
     password: str = Field(..., min_length=5, max_length=24, description="user password")
 
 
-class CreateUserResponse(BaseModel):
+class UserOutData(BaseModel):
     user_id: UUID
     username: str
     email: EmailStr

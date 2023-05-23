@@ -10,9 +10,10 @@ from api.app.schemas.auth_schema import TokenPayload
 from api.app.services.user_service import UserService
 
 reusable_oauth = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.PREFIX}/auth/login",
+    tokenUrl=f"{settings.PREFIX}/login",
     scheme_name="JWT"
 )
+
 
 async def get_current_user(token: str = Depends(reusable_oauth)) -> User:
     try:
