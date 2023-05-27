@@ -1,7 +1,7 @@
 from jose import jwt
 from typing import Any
 from pydantic import ValidationError
-from fastapi import APIRouter, Depends, HTTPException, status,Body
+from fastapi import APIRouter, Depends, HTTPException, status, Body
 from fastapi.security import OAuth2PasswordRequestForm
 
 from api.app.config import settings
