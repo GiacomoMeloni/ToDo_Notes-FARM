@@ -12,6 +12,7 @@ from api.app.router import auth_router
 from api.app.router import todo_router
 from api.app.router import health_router
 from api.app.models.user_model import User
+from api.app.models.todo_model import ToDo
 from api.common.logger.setup import logger_setup
 
 
@@ -43,7 +44,7 @@ async def app_init():
     db_client: AsyncIOMotorClient = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING).todo
 
     await init_beanie(database=db_client,
-                      document_models=[User])
+                      document_models=[User, ToDo])
 
 app.include_router(health_router.router)
 app.include_router(user_router.router)
