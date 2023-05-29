@@ -1,4 +1,4 @@
-from typing import Optional
+from uuid import UUID
 from fastapi import APIRouter, status, Depends
 
 from api.app.config import settings
@@ -20,3 +20,8 @@ async def get_todos(current_user: User = Depends(get_current_user)):
 @router.post('/create', summary="Create a todo", response_model=ToDo)
 async def create_todo(data: ToDoCreate, current_user: User = Depends(get_current_user)):
     return await TodoService.create_todo(data=data, user=current_user)
+
+
+@router.get('/{todo_id}', summary="Get a ToDo by ID", response_model=ToDoOut)
+async def get_todo(todo_id: UUID, current_user: User = Depends(get_current_user)):
+    return await TodoService.get_todo(todo_id=todo_id, user=current_user)
