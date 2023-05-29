@@ -6,7 +6,7 @@ from api.app.config import settings
 from api.app.schemas.user_schema import UserAuth, UserOutData
 from api.app.services.user_service import UserService
 
-router = APIRouter(prefix=settings.PREFIX, tags=["users"])
+router = APIRouter(prefix=f"{settings.PREFIX}/user", tags=["users"])
 
 
 @router.post('/create', summary="Create a new user", response_model=UserOutData)

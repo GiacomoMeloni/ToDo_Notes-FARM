@@ -5,14 +5,14 @@ from pydantic import BaseModel, Field
 
 
 class ToDoCreate(BaseModel):
-    title: str = Field(..., title='Title', max_length=55, min_length=1)
-    description: str = Field(..., title='Description', max_length=7555, min_length=1)
+    title: str = Field(..., title='ToDo Title', max_length=55, min_length=1)
+    description: str = Field(..., title='ToDo Description', max_length=7555, min_length=1)
     status: Optional[bool] = False
 
 
 class ToDoUpdate(BaseModel):
-    title: Optional[str] = Field(..., title='Title', max_length=55, min_length=1)
-    description: Optional[str] = Field(..., title='Description', max_length=7555, min_length=1)
+    title: Optional[str] = Field(..., title='ToDo Title', max_length=55, min_length=1)
+    description: Optional[str] = Field(..., title='ToDo Description', max_length=7555, min_length=1)
     status: Optional[bool] = False
 
 

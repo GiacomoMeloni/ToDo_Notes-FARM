@@ -1,8 +1,9 @@
 from jose import jwt
 from typing import Any
 from pydantic import ValidationError
-from fastapi import APIRouter, Depends, HTTPException, status, Body
+from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter, Depends, HTTPException, status, Body
 
 from api.app.config import settings
 from api.app.models.user_model import User
@@ -13,7 +14,7 @@ from api.app.schemas.auth_schema import TokenPayload
 from api.app.services.user_service import UserService
 from api.app.security import create_access_token, create_refresh_token
 
-router = APIRouter(prefix=settings.PREFIX, tags=["auth"])
+router = APIRouter(prefix=f"{settings.PREFIX}/auth", tags=["auth"])
 
 
 @router.post('/login', summary="Create access and refresh tokens for user", response_model=TokenSchema)
@@ -58,3 +59,13 @@ async def refresh_token(refresh_token: str = Body(...)):
 
     return {"access_token": create_access_token(user.user_id),
             "refresh_token": create_refresh_token(user.user_id)}
+
+
+@router.get('/health', summary="Health route for authentication router")
+async def health() -> JSONResponse:
+    try:
+        return JSONResponse(content={"status": "OK"},
+                            status_code=status.HTTP_200_OK)
+    except Exception as e:
+        return JSONResponse(content={"status": "KO"},
+                            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -10,7 +10,7 @@ from api.app.schemas.auth_schema import TokenPayload
 from api.app.services.user_service import UserService
 
 reusable_oauth = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.PREFIX}/login",
+    tokenUrl=f"{settings.PREFIX}/auth/login",
     scheme_name="JWT"
 )
 

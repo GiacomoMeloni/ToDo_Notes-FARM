@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import APIRouter, status, Depends
 
 from api.app.config import settings
@@ -8,7 +9,7 @@ from api.app.services.todo_service import TodoService
 from api.app.schemas.todo_schema import ToDoOut, ToDoCreate
 
 
-router = APIRouter(prefix=settings.PREFIX, tags=["todo"])
+router = APIRouter(prefix=f"{settings.PREFIX}/todo", tags=["todo"])
 
 
 @router.get('/', summary="Get all user's todos", response_model=ToDoOut)
