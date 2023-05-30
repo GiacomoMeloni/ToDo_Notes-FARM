@@ -1,3 +1,4 @@
+from typing import List
 from uuid import UUID
 from fastapi import APIRouter, status, Depends
 
@@ -12,7 +13,7 @@ from api.app.schemas.todo_schema import ToDoOut, ToDoCreate
 router = APIRouter(prefix=f"{settings.PREFIX}/todo", tags=["todo"])
 
 
-@router.get('/', summary="Get all user's todos", response_model=ToDoOut)
+@router.get('/', summary="Get all user's todos", response_model=List[ToDoOut])
 async def get_todos(current_user: User = Depends(get_current_user)):
     return await TodoService.list_todos(user=current_user)
 

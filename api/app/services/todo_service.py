@@ -8,7 +8,7 @@ from api.app.schemas.todo_schema import ToDoCreate, ToDoUpdate
 class TodoService:
     @staticmethod
     async def list_todos(user: User) -> List[ToDo]:
-        todos = await ToDo.find(ToDo.owner.id == user.user_id).to_list()
+        todos = await ToDo.find(ToDo.owner.id == user.id).to_list()
         return todos
 
     @staticmethod
