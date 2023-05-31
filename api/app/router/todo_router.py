@@ -7,7 +7,7 @@ from api.app.models.todo_model import ToDo
 from api.app.models.user_model import User
 from api.app.deps.user_deps import get_current_user
 from api.app.services.todo_service import TodoService
-from api.app.schemas.todo_schema import ToDoOut, ToDoCreate
+from api.app.schemas.todo_schema import ToDoOut, ToDoCreate, ToDoUpdate
 
 
 router = APIRouter(prefix=f"{settings.PREFIX}/todo", tags=["todo"])
@@ -26,3 +26,13 @@ async def create_todo(data: ToDoCreate, current_user: User = Depends(get_current
 @router.get('/{todo_id}', summary="Get a ToDo by ID", response_model=ToDoOut)
 async def get_todo(todo_id: UUID, current_user: User = Depends(get_current_user)):
     return await TodoService.get_todo(todo_id=todo_id, user=current_user)
+
+
+@router.put('/{todo_id}', summary="Update ToDo by ID", response_model=ToDoOut)
+async def update_todo(todo_id: UUID, data: ToDoUpdate, current_user: User = Depends(get_current_user)):
+    return await TodoService.update_todo(todo_id=todo_id, user=current_user, data=data)
+
+
+@router.delete('/{todo_id}', summary="Delete ToDo by ID", response_model=ToDoOut)
+async def update_todo(todo_id: UUID, current_user: User = Depends(get_current_user)):
+    return await TodoService.delete_todo(todo_id=todo_id, user=current_user)
