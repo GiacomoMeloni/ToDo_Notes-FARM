@@ -18,7 +18,7 @@ class TodoService:
 
     @staticmethod
     async def get_todo(todo_id: UUID, user: User):
-        todo = ToDo.find_one(ToDo.todo_id == todo_id, ToDo.owner.id == user.id)
+        todo = await ToDo.find_one(ToDo.todo_id == todo_id, ToDo.owner.id == user.id)
         return todo
 
     @staticmethod

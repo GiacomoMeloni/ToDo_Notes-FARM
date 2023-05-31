@@ -1,6 +1,6 @@
-from typing import List
 from uuid import UUID
-from fastapi import APIRouter, status, Depends
+from typing import List
+from fastapi import APIRouter, status, Depends, Response
 
 from api.app.config import settings
 from api.app.models.todo_model import ToDo
@@ -33,6 +33,7 @@ async def update_todo(todo_id: UUID, data: ToDoUpdate, current_user: User = Depe
     return await TodoService.update_todo(todo_id=todo_id, user=current_user, data=data)
 
 
-@router.delete('/{todo_id}', summary="Delete ToDo by ID", response_model=ToDoOut)
-async def update_todo(todo_id: UUID, current_user: User = Depends(get_current_user)):
-    return await TodoService.delete_todo(todo_id=todo_id, user=current_user)
+@router.delete('/{todo_id}', summary="Delete ToDo by ID")
+async def update_todo(todo_id: UUID, current_user: User = Depends(get_current_user)) -> Response:
+    await TodoService.delete_todo(todo_id=todo_id, user=current_user)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
