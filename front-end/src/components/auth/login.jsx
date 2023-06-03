@@ -1,6 +1,7 @@
 import { Flex, FormControl, FormErrorMessage, Heading, Input, useColorModeValue, Button } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 import { useNavigate } from "react-router-dom";
+import { ThemeToggler } from "../theme/themeToggler";
 
 export const Login = () => {
     const {
@@ -16,7 +17,9 @@ export const Login = () => {
         console.log(values);
     }
 
-    return (<Flex height="100vh" align="center" justifyContent="center">
+    return (
+    
+    <Flex height="100vh" align="center" justifyContent="center">
         <Flex 
         direction="column" 
         alignItems="center" 
@@ -57,7 +60,7 @@ export const Login = () => {
                         {errors.password && errors.password.message}
                     </FormErrorMessage>
                 </FormControl>
-
+                
                 <Button 
                 isLoading={isSubmitting}
                 loadingText="Logging in..."
@@ -67,13 +70,14 @@ export const Login = () => {
                 mt={6}
                 mb={6}
                 type="submit">Login</Button>
-
-                <Button onClick={()=>navigate("/register", {replace: true})} 
-                width="100%"
-                colorScheme="gray"
-                variant="outline"
-                mt={6}>Register Instead</Button>
             </form>
+            <ThemeToggler  showLabel={true}/>
+
+            <Button onClick={()=>navigate("/register", {replace: true})} 
+            width="100%"
+            colorScheme="gray"
+            variant="outline"
+            mt={6}>Register Instead</Button>
         </Flex>
     </Flex>
 );}
