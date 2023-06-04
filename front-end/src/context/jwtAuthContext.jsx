@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer, useRef } from "react"
 import { validateToken } from "../utils/jwt";
-import { setSession } from "../utils/session";
+import { resetSession, setSession } from "../utils/session";
+import AxiosInstance from "../services/auth_service";
 
 const initialState = {
     isAuthenticated: false,
@@ -48,7 +49,7 @@ const handlers = {
 
 const reducer = (state, action) => handlers[action.type] ? handlers[action.type](state, action) : state;
 
-const AuthProvider = (props) => {
+export const AuthProvider = (props) => {
     const {children} = props;
     const [state, dispatch] = useReducer(reducer, initialState)
     const isMouted = useRef(false)
@@ -94,4 +95,44 @@ const AuthProvider = (props) => {
         initialize(); 
         isMouted.current = true;
     }, []);   
-} 
+
+    const getToken = async (email, password) => {
+        const formData = new FormData();
+        formData.append("username", email);
+        formData.append("password", password);
+        
+        try {
+            const response = await AxiosInstance.post("/auth/login", formData);
+            setSession(response.data.access_token, response.data.refresh_token);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const login = async (email, password) => {
+        try{
+            await getToken(email, password);
+            const response = await AxiosInstance.get("/users/me");
+            const {data: user} = response;
+            dispatch({
+                type: "LOGIN",
+                payload: user,
+            });
+        }catch (error){
+            return Promise.reject(error);
+        }
+    }
+
+    const logout = () => {
+        resetSession();
+        dispatch({type: "LOGOUT"});
+    }
+
+    return (
+        <AuthContext.Provider value={{...state, login, logout}}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+
+export const AuthConsumer = AuthContext.Consumer;

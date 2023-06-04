@@ -6,7 +6,7 @@ const AxiosInstance = axios.create({
     baseURL
 });
 
-AxiosInstance.interceptors.response.user(
+AxiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         return Promise.reject(error)
