@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../hooks/useAuth"
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 export const PublicRoute = (props) => {
-    const  {children} = props;
-    const auth = useAuth();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [isVerified, setIsVerified] = useState(false);
+  const { children } = props;
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isVerified, setIsVerified] = useState(false);
 
-    useEffect(() => {
-        if(auth.isAuthenticated){
-            navigate('/', {replace: true, state: {from: location}});
-        } else {
-            setIsVerified(true)
-        }
-    }, [auth.isAuthenticated, location, navigate])
-
-    if (!isVerified){
-        return null
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate("/", { replace: true, state: { from: location } });
+    } else {
+      setIsVerified(true);
     }
-    return <>{children}</>
-}
+  }, [auth.isAuthenticated, location, navigate]);
+
+  if (!isVerified) {
+    return null;
+  }
+  return <>{children}</>;
+};
