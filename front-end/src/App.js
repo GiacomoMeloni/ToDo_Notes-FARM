@@ -9,36 +9,60 @@ import { Authenticated } from './components/auth/authenticated';
 function App() {
   return (
     <AuthProvider>
-    <Router>
-      <AuthConsumer>
-        {(auth) => !auth.isInitialized ? (
-          <Flex
-          height="100vh"
-          alignItems="center"
-          justifyContent="center"
-          >
-            <Spinner
-            thickness="4xp"
-            speed="0.65s"
-            emptyColor="green.200"
-            color="green.500"
-            size="xl"
+      <Router>
+        <AuthConsumer>
+          {(auth) => 
+            !auth.isInitialized ? (
+            <Flex
+              height="100vh"
+              alignItems="center"
+              justifyContent="center"
             >
-
-            </Spinner>
-          </Flex>
-        ) : (
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="green.200"
+                color="green.500"
+                size="xl"
+              />
+            </Flex>
+          ) : (
         <Routes>
-          <Route path="/login" element={<PublicRoute><Login/></PublicRoute>} />
-          <Route path="/register" element={<PublicRoute><Register/></PublicRoute>} />
-          <Route path="/" element={<Authenticated>I am home</Authenticated>} />
+          <Route 
+            path="/login" 
+            element={
+              <PublicRoute>
+                <Login/>
+              </PublicRoute>
+            } 
+          />
+          
+          <Route 
+            path="/register" 
+            element={
+              <PublicRoute>
+                <Register/>
+              </PublicRoute>
+            } 
+          />
+          
+          <Route 
+            path="/" 
+            element={
+              <Authenticated>
+                I am home
+              </Authenticated>
+            }
+          />
+          
           <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
-      )}
-      </AuthConsumer>
-    </Router>
+          )
+        }
+        </AuthConsumer>
+      </Router>
     </AuthProvider>
-  )
+  );
 }
 
 export default App;
