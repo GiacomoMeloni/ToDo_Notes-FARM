@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:5000/api/v1/'
+const baseURL = 'http://localhost:5000/api/todo/v1/'
 
 const AxiosInstance = axios.create({
     baseURL

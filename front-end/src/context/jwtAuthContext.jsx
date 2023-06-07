@@ -108,7 +108,7 @@ export const AuthProvider = (props) => {
   const login = async (email, password) => {
     try {
       await getTokens(email, password);
-      const response = await axiosInstance.get("/users/me");
+      const response = await axiosInstance.get("/user/me");
       const { data: user } = response;
       dispatch({
         type: "LOGIN",
