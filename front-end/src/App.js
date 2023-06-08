@@ -5,6 +5,7 @@ import { AuthProvider, AuthConsumer } from './context/jwtAuthContext';
 import { Flex, Spinner } from '@chakra-ui/react';
 import { PublicRoute } from './components/auth/PublicRoute';
 import { Authenticated } from './components/auth/authenticated';
+import { ToDoList } from './components/ToDo/ToDoList';
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
             path="/" 
             element={
               <Authenticated>
-                I am home
+                <ToDoList />
               </Authenticated>
             }
           />
