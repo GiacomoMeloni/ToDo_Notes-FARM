@@ -1,3 +1,4 @@
+import beanie.exceptions
 import pymongo.errors
 from pymongo import errors
 from fastapi.responses import JSONResponse
@@ -20,10 +21,12 @@ async def create_user(data: UserAuth):
     except errors.DuplicateKeyError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="User with this email or username already exist")
+    except beanie.exceptions.RevisionIdWasChanged:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="User with this email or username already exist")
     except Exception as e:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,
-                            content={"status": "KO",
-                                     "message": "User with this email or username already exist"})
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Something wrong creating the user")
 
 
 @router.get('/me', summary="Get details of currently logged user", response_model=UserOutData)
