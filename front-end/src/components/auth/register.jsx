@@ -1,7 +1,8 @@
-import { Flex, FormControl, FormErrorMessage, Heading, Input, useColorModeValue, Button } from "@chakra-ui/react";
+import { Flex, FormControl, FormErrorMessage, Heading, Input, useColorModeValue, Button, useToast } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 import { useNavigate } from "react-router-dom";
 import { ThemeToggler } from "../theme/themeToggler";
+import AxiosInstance from "../../services/auth_service";
 
 export const Register = () => {
     const {
@@ -10,11 +11,26 @@ export const Register = () => {
         formState: {errors, isSubmitting}
     } = useForm();
 
-
+    const toast = useToast();
     const navigate = useNavigate();
 
-    const onSubmit = (values) => {
-        console.log(values);
+    const onSubmit = async (values) => {
+        try {
+            await AxiosInstance.post('/user/create', values)
+            toast({ 
+                title: "Account crated successfully",
+                status: "success",
+                isClosable: true,
+                duration: 1500,
+            });
+        } catch (error) {
+            toast({ 
+                title: `${error.response.data.detail}`,
+                status: "error",
+                isClosable: true,
+                duration: 1500,
+            });
+        }
     }
 
     return (
