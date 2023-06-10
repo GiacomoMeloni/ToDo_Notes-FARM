@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Box, Center, Container, Spinner } from "@chakra-ui/react"
 import AxiosInstance from "../../services/auth_service";
+import { ToDoCard } from "./ToDoCard";
 
 export const ToDoList = () => {
     const [todos, setTodos] = useState([]);
@@ -8,7 +9,7 @@ export const ToDoList = () => {
     const isMounted = useRef(false);
     
     useEffect(() => {
-        if (isMounted) return;
+        if (isMounted.current) return;
         fetchToDo();
         isMounted.current = true;
     }, []);
@@ -40,7 +41,7 @@ export const ToDoList = () => {
             ) : ( 
                 <Box mt={6}>
                     { todos?.map((todo) => (
-                        <TodoCard todo={todo} key={todo.id}/>
+                        <ToDoCard todo={todo} key={todo.id}/>
                     ))}
                 </Box>
             )}
