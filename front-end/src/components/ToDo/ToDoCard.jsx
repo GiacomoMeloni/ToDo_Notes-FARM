@@ -1,4 +1,4 @@
-import { Flex, useColorModeValue, Text } from "@chakra-ui/react"
+import { Badge, Flex, useColorModeValue, Text } from "@chakra-ui/react"
 
 export const ToDoCard = ( {todo} ) => {
     return (
@@ -9,13 +9,17 @@ export const ToDoCard = ( {todo} ) => {
         p={3}
         rounded="lg"
         alignItems="center"
+        justifyContent="space-between"
         _hover={{
             opacity: 0.9,
-            cursor: "pinter",
+            cursor: "pointer",
             transform: "translateY(-3px)"
         }}
         >
             <Text> {todo.title} </Text>
+            <Badge colorScheme={todo.status ? "green" : "purple"}>
+                {todo.status ? "Completed" : "Pending"}
+            </Badge>
         </Flex>
     );
 }
