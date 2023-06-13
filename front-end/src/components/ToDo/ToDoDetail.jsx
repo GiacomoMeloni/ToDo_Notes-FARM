@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"; 
 import AxiosInstance from "../../services/auth_service";
-import { Button, Center, Container, Spinner } from "@chakra-ui/react"
+import { Text, Button, Center, Container, Spinner, useColorModeValue } from "@chakra-ui/react"
 
 export const ToDoDetail = () => {
     const [todo, setTodo] = useState({});
@@ -9,6 +9,7 @@ export const ToDoDetail = () => {
     const isMounted = useRef(false);
     const navigate = useNavigate();
     const { todoId } = useParams()
+    const background = useColorModeValue("gray.300", "gray.600");
 
     useEffect(() => {
         if (isMounted.current) return;
@@ -53,6 +54,17 @@ export const ToDoDetail = () => {
                 onClick={() => navigate('/', {replace: true})}>
                     Back
                 </Button>
+            </Container>
+            <Container
+            bg={background}
+            minHeight="7rem"
+            my={3}
+            p={3}
+            rounded="lg"
+            alignItems="center"
+            justifyContent="space-between">
+                <Text fontSize={22}> {todo.title} </Text>
+                <Text bg="gray.500" mt={2} p={2} rounded="lg"> {todo.description} </Text>
             </Container>
         </>
     );
