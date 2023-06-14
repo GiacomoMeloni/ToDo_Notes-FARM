@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY: str = env_config('JWT_SECRET_KEY', cast=str)
     JWT_REFRESH_SECRET_KEY: str = env_config("JWT_REFRESH_SECRET_KEY", cast=str)
     ALGORITHM = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 15
     REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7days
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
     PROJECT_NAME: str = "DuNNoWToDo"
