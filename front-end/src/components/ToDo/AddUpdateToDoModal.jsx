@@ -1,6 +1,6 @@
-import { Box, Button, FormControl, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
+import { FormErrorMessage, useColorModeValue, Input, Box, Button, FormControl, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast, Textarea } from "@chakra-ui/react"
 import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form;"
+import { useForm } from "react-hook-form"
 
 export const AddUpdateToDoModal = ({
     editable=false,
@@ -11,7 +11,9 @@ export const AddUpdateToDoModal = ({
     const { isOpen, onOpen, onClose} = useDisclosure();
     const toast = useToast();
     const { todoId } = useParams();
-    const { handleSubmit, register, control } = useForm({
+    const { handleSubmit, register, control, formState: {
+        errors, isSubmitting
+    } } = useForm({
         defaultValues: {...defaultValues}
     });
 
@@ -35,7 +37,55 @@ export const AddUpdateToDoModal = ({
                         </ModalHeader>
                         <ModalCloseButton/>
                         <ModalBody>
-                            <FormControl></FormControl>
+                            <FormControl isInvalid={errors.title}>
+                                <Input
+                                placeholder="ToDo Title..."
+                                background={useColorModeValue('gray.300', 'gray.600')}
+                                type="text"
+                                variant="filled"
+                                size="lg"
+                                mt={6}
+                                {...register("title", {
+                                    required: "This is a required field",
+                                    minLength: {
+                                        value: 5,
+                                        message: "Title must be at least 5 characters"
+                                    },
+                                    maxLength: {
+                                        value: 55,
+                                        message: "Title must be at most 55 characters"
+                                    }
+                                })}
+                                />
+                                <FormErrorMessage>
+                                    {errors.title && errors.title.message}
+                                </FormErrorMessage>
+                            </FormControl>
+                            <FormControl isInvalid={errors.title}>
+                                <Textarea
+                                row={5}
+                                placeholder="Add Description..."
+                                background={useColorModeValue('gray.300', 'gray.600')}
+                                type="text"
+                                variant="filled"
+                                size="lg"
+                                mt={6}
+                                {...register("description", {
+                                    required: "This is a required field",
+                                    minLength: {
+                                        value: 5,
+                                        message: "Description must be at least 5 characters"
+                                    },
+                                    maxLength: {
+                                        value: 200,
+                                        message: "Description must be at most 200 characters"
+                                    }
+                                })}
+                                />
+                                <FormErrorMessage>
+                                    {errors.description && errors.description.message}
+                                </FormErrorMessage>
+                            </FormControl>
                         </ModalBody>
                     </ModalContent>
                 </form>

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"; 
 import AxiosInstance from "../../services/auth_service";
 import { Text, Button, Center, Container, Spinner, useColorModeValue } from "@chakra-ui/react"
+import { AddUpdateToDoModal } from "./AddUpdateToDoModal";
 
 export const ToDoDetail = () => {
     const [todo, setTodo] = useState({});
@@ -65,6 +66,16 @@ export const ToDoDetail = () => {
             justifyContent="space-between">
                 <Text fontSize={22}> {todo.title} </Text>
                 <Text bg="gray.500" mt={2} p={2} rounded="lg"> {todo.description} </Text>
+                <AddUpdateToDoModal
+                    my={3}
+                    editable={true}
+                    defaultValues={{
+                        title: todo.title, 
+                        description: todo.description, 
+                        status: todo.status
+                    }}
+                    onSuccess={fetchTodo} 
+                />
             </Container>
         </>
     );
