@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Box, Center, Container, Spinner } from "@chakra-ui/react"
 import AxiosInstance from "../../services/auth_service";
 import { ToDoCard } from "./ToDoCard";
+import { AddUpdateToDoModal } from "./AddUpdateToDoModal";
 
 export const ToDoList = () => {
     const [todos, setTodos] = useState([]);
@@ -28,6 +29,7 @@ export const ToDoList = () => {
     
     return (
         <Container mt={9}>
+            <AddUpdateToDoModal/>
             {loading ? (
                 <Center mt={6}>
                     <Spinner

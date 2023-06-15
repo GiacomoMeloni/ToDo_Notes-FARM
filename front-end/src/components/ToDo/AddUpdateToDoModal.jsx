@@ -23,7 +23,7 @@ export const AddUpdateToDoModal = ({
             if (editable) {
                 await AxiosInstance.put(`/todo/${todoId}`, values)
             } else {
-                await AxiosInstance.post(`/todo/`, values)
+                await AxiosInstance.post(`/todo/create`, values)
             }
             toast({
                 title: editable ? "ToDo Updated" : "ToDo Added",
@@ -90,7 +90,7 @@ export const AddUpdateToDoModal = ({
                             </FormControl>
                             <FormControl isInvalid={errors.title}>
                                 <Textarea
-                                row={5}
+                                rows={5}
                                 placeholder="Add Description..."
                                 background={useColorModeValue('gray.300', 'gray.600')}
                                 type="text"
