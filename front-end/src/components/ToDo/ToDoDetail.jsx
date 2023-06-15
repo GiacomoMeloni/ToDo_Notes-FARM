@@ -41,6 +41,7 @@ export const ToDoDetail = () => {
                 isClosable: true,
                 duration: 1500
             })
+            navigate('/')
         })
         .catch((err) => {
             console.error(err)
