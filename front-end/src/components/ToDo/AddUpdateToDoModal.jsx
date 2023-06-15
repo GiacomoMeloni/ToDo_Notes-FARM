@@ -1,6 +1,7 @@
 import { FormErrorMessage, useColorModeValue, Input, Box, Button, FormControl, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast, Textarea, FormLabel, Switch, ModalFooter, Stack } from "@chakra-ui/react"
 import { useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form"
+import AxiosInstance from "../../services/auth_service";
 
 export const AddUpdateToDoModal = ({
     editable=false,
@@ -17,6 +18,32 @@ export const AddUpdateToDoModal = ({
         defaultValues: {...defaultValues}
     });
 
+    const onSubmit = async (values) => {
+        try {
+            if (editable) {
+                await AxiosInstance.put(`/todo/${todoId}`, values)
+            } else {
+                await AxiosInstance.post(`/todo/`, values)
+            }
+            toast({
+                title: editable ? "ToDo Updated" : "ToDo Added",
+                status: "success",
+                isClosable: true,
+                duration: 1500
+            })
+            onSuccess(); 
+            onClose();
+        }catch(error){
+            console.error(error)
+            toast({
+                title: "Something went wrong. Please try again.",
+                status: "error",
+                isClosable: true,
+                duration: 1500
+            })
+        }
+    }
+
     return (
         <Box {...rest}>
             <Button w="100%" colorScheme="green" onClick={onOpen}>
@@ -30,7 +57,7 @@ export const AddUpdateToDoModal = ({
             isCentered
             >
                 <ModalOverlay/>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <ModalContent>
                         <ModalHeader>
                             {editable ? "Update ToDo" : "Add ToDo"}
