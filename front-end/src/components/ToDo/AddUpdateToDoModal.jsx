@@ -88,7 +88,7 @@ export const AddUpdateToDoModal = ({
                                     {errors.title && errors.title.message}
                                 </FormErrorMessage>
                             </FormControl>
-                            <FormControl isInvalid={errors.title}>
+                            <FormControl isInvalid={errors.description}>
                                 <Textarea
                                 rows={5}
                                 placeholder="Add Description..."

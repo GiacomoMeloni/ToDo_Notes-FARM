@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"; 
 import AxiosInstance from "../../services/auth_service";
-import { Text, Button, Center, Container, Spinner, useColorModeValue } from "@chakra-ui/react"
+import { Text, Button, Center, Container, Spinner, useColorModeValue, useToast } from "@chakra-ui/react"
 import { AddUpdateToDoModal } from "./AddUpdateToDoModal";
 
 export const ToDoDetail = () => {
@@ -11,6 +11,7 @@ export const ToDoDetail = () => {
     const navigate = useNavigate();
     const { todoId } = useParams()
     const background = useColorModeValue("gray.300", "gray.600");
+    const toast = useToast();
 
     useEffect(() => {
         if (isMounted.current) return;
@@ -28,6 +29,29 @@ export const ToDoDetail = () => {
         .finally(() => {
             setLoading(false);
         })
+    }
+
+    const deleteTodo = async () => {
+        setLoading(true);
+        AxiosInstance.delete(`/todo/${todoId}`)
+        .then(() => {
+            toast({
+                title: "ToDo deleted successfully",
+                status: "success",
+                isClosable: true,
+                duration: 1500
+            })
+        })
+        .catch((err) => {
+            console.error(err)
+            toast({
+                title: "Could not delete ToDo!",
+                status: "error",
+                isClosable: true,
+                duration: 2000
+            })
+        })
+        .finally(() => setLoading(false))
     }
 
     if (loading) {
@@ -76,6 +100,9 @@ export const ToDoDetail = () => {
                     }}
                     onSuccess={fetchTodo} 
                 />
+                <Button isLoading={loading} colorScheme="red" width="100%" onClick={deleteTodo}>
+                    Delete
+                </Button>
             </Container>
         </>
     );

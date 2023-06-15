@@ -11,11 +11,11 @@ export const ToDoList = () => {
     
     useEffect(() => {
         if (isMounted.current) return;
-        fetchToDo();
+        fetchToDos();
         isMounted.current = true;
     }, []);
 
-    const fetchToDo = async () => {
+    const fetchToDos = () => {
         setLoading(true);
         AxiosInstance.get("/todo")
         .then((res) => {
@@ -29,7 +29,7 @@ export const ToDoList = () => {
     
     return (
         <Container mt={9}>
-            <AddUpdateToDoModal/>
+            <AddUpdateToDoModal onSuccess={fetchToDos}/>
             {loading ? (
                 <Center mt={6}>
                     <Spinner
