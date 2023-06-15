@@ -1,6 +1,6 @@
-import { FormErrorMessage, useColorModeValue, Input, Box, Button, FormControl, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast, Textarea } from "@chakra-ui/react"
+import { FormErrorMessage, useColorModeValue, Input, Box, Button, FormControl, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast, Textarea, FormLabel, Switch, ModalFooter, Stack } from "@chakra-ui/react"
 import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 
 export const AddUpdateToDoModal = ({
     editable=false,
@@ -86,7 +86,43 @@ export const AddUpdateToDoModal = ({
                                     {errors.description && errors.description.message}
                                 </FormErrorMessage>
                             </FormControl>
+                            <Controller
+                            control={control}
+                            name= "status"
+                            render={({field}) => (
+                                <FormControl mt={6} display="flex" alignItems="center">
+                                    <FormLabel htmlFor="is-done"> Status </FormLabel>
+                                    <Switch
+                                        onChange={(e) => field.onChange(e.target.checked)}
+                                        isChecked={field.value}
+                                        id="id-done"
+                                        size="lg"
+                                        name="status"
+                                        idDisabled={false}
+                                        colorScheme="green"
+                                        variant="ghost"
+                                    />
+                                </FormControl>
+                            )}
+                            />
                         </ModalBody>
+                        <ModalFooter>
+                            <Stack direction="row" spacing={4}>
+                                <Button 
+                                onClick={onClose}
+                                disabled={isSubmitting}>
+                                    Close
+                                </Button>
+                                <Button 
+                                colorScheme="green"
+                                type="submit"
+                                isLoading={isSubmitting}
+                                loadingText={editable ? "Updating" : "Creating"}
+                                >
+                                    {editable ? "Update" : "Create"}
+                                </Button>
+                            </Stack>
+                        </ModalFooter>
                     </ModalContent>
                 </form>
             </Modal>
