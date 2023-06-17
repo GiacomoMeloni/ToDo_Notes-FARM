@@ -14,7 +14,7 @@ Each component plays a crucial role in the overall architecture:<br>
 
 <div style="display:flex; align-items: center"> 
 
-<img src="./docs/img/fastapi.svg" style="margin-right: 20px" width="15%" alt="FastAPI logo">
+<img src="./docs/img/fastapi.svg" style="margin-right: 20px" width="10%" alt="FastAPI logo">
 
 <span style="color: #18EAA7;">**FastAPI**</span>: FastAPI serves as the backbone of the back-end, providing a robust and efficient API interface. It enables seamless communication between the front-end and the database, ensuring smooth data retrieval and manipulation.
 
@@ -22,7 +22,7 @@ Each component plays a crucial role in the overall architecture:<br>
 
 <div style="display:flex; align-items: center"> 
 
-<img src="./docs/img/react.png" style="margin-right: 20px" width="15%" alt="FastAPI logo">
+<img src="./docs/img/react.png" style="margin-right: 20px" width="10%" alt="FastAPI logo">
 
 <span style="color: #189AEA;">**React**</span>: React serves as the front-end framework, enabling the creation of dynamic and interactive user interfaces. With its component-based structure and efficient rendering capabilities, React empowers developers to build engaging and responsive web applications.
 
@@ -30,7 +30,7 @@ Each component plays a crucial role in the overall architecture:<br>
 
 <div style="display:flex; align-items: center"> 
 
-<img src="./docs/img/mongodb.png" style="margin-right: 20px" width="15%" alt="FastAPI logo">
+<img src="./docs/img/mongodb.png" style="margin-right: 20px" width="10%" alt="FastAPI logo">
 
 <span style="color: #18D80F;">**MongoDB**</span>: MongoDB serves as the underlying database, offering a flexible and scalable solution for storing application data. Its document-oriented nature allows for easy data modeling and retrieval, while its distributed architecture ensures high availability and performance.
 
