@@ -3,7 +3,7 @@
 
 Welcome to ToDo Notes FARM Project! 
 This project serves as an entry-level exploration of the FARM stack (FastAPI - React - MongoDB). 
-<br>Its primary objective is to gain knowledge about the technologies involved. All you can find here follows what shown in this [tutorial](https://www.youtube.com/watch?v=G8MsHbCzyZ4&t=6188s&ab_channel=ABDLogs) and serves as a comprehensive guide for beginners who wish to gain familiarity with these tools. 
+<br>The primary objective of this project is to gain knowledge about the technologies involved. All you can find here follows what shown in this [tutorial](https://www.youtube.com/watch?v=G8MsHbCzyZ4&t=6188s&ab_channel=ABDLogs) and serves as a comprehensive guide for beginners who wish to gain familiarity with these tools. 
 <br>You can find a lot of material in GitHub as well if you are interested in more FARM-based projects.
 <br><br>
 <h3>🐮 FARM Stack Overview</h3>
